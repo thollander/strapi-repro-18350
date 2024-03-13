@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_products_cross_sellings",
+  "info": {
+    "displayName": "crossSelling"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

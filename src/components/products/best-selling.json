@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_products_best_sellings",
+  "info": {
+    "displayName": "bestSelling"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}
