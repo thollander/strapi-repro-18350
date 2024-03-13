@@ -32,26 +32,20 @@ npm run build
 yarn build
 ```
 
-## ⚙️ Deployment
+## Repro for https://github.com/strapi/strapi/issues/18350
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+There is a dataset present in the root folder : `export_20240313210813.tar.gz`
 
-## 📚 Learn more
+You can import it through : `yarn strapi import -f ./export_20240313210813.tar.gz --force`
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+A warning should be logged : 
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+```
+...
+warn: Skipping link products.cross-selling:1 -> api::product.product:3 due to a foreign key constraint.
+...
+```
 
-## ✨ Community
+It's only a warning but there is actually an error as the product **Yellow shirt** is not in the `crossSelling` field of the `Homepage`. 
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+This error seems to happen when you have multiple components within the same collection. 
